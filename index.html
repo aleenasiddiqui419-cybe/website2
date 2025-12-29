@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Individual Differences in Education</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f9fbfc;
+            color: #333;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: #9b0404;
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-container img {
+            height: 70px;
+            width: auto;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #1abc9c;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 100px;
+            height: 80vh;
+            background: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1600&fit=crop') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(233, 234, 236, 0.8), rgba(96, 15, 96, 0.6));
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            padding: 20px;
+        }
+
+        .hero h2 {
+            font-size: 3.8rem;
+            margin-bottom: 25px;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.7);
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            font-weight: 300;
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.8rem;
+            color: #0f3460;
+            margin-bottom: 60px;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            font-size: 1.1rem;
+        }
+
+        /* Topics Grid */
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .topic-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .topic-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .topic-card h3 {
+            padding: 20px;
+            color: #0f3460;
+            font-size: 1.5rem;
+        }
+
+        .topic-card p {
+            padding: 0 20px 30px;
+            color: #555;
+        }
+
+        /* Reviews */
+        .review-form {
+            max-width: 700px;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .review-form input, .review-form textarea {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+        }
+
+        .review-form button {
+            padding: 15px;
+            background: #0f3460;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .review-form button:hover {
+            background: #0f2950;
+        }
+
+        .review-list {
+            max-width: 800px;
+            margin: 40px auto;
+        }
+
+        .review {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .review strong {
+            color: #0f3460;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #9b0404;
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #f4f5f7;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+        }
+
+        .footer-column ul li a:hover {
+            color: #1abc9c;
+        }
+
+        .social-icons a {
+            font-size: 1.5rem;
+            color: #ddd;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: #1abc9c;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 1rem;
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+        .delay-8 { animation-delay: 0.8s; }
+        .delay-9 { animation-delay: 0.9s; }
+        .delay-10 { animation-delay: 1s; }
+        .delay-11 { animation-delay: 1.1s; }
+        .delay-12 { animation-delay: 1.2s; }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .hero h2 { font-size: 3.2rem; }
+            .hero p { font-size: 1.4rem; }
+            h2 { font-size: 2.5rem; }
+            .section { padding: 80px 0; }
+            .topics-grid { gap: 25px; }
+            .topic-card img { height: 180px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero { height: 60vh; margin-top: 90px; }
+            .hero h2 { font-size: 2.8rem; }
+            .hero p { font-size: 1.3rem; }
+            header h1 { font-size: 1.5rem; }
+            .logo-container img { height: 60px; }
+            .menu-toggle { display: block; }
+            nav ul { display: none; flex-direction: column; gap: 20px; width: 100%; margin-top: 20px; }
+            nav ul.active { display: flex; }
+            nav ul li { text-align: center; }
+            .section { padding: 60px 0; }
+            h2 { font-size: 2.2rem; margin-bottom: 40px; }
+            .about-content { gap: 30px; }
+            .about-img, .about-text { min-width: 100%; }
+            .topics-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+            .topic-card img { height: 160px; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 15px; }
+            .hero h2 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+            header h1 { font-size: 1.3rem; }
+            .logo-container { gap: 10px; }
+            .logo-container img { height: 50px; }
+            .section { padding: 50px 0; }
+            h2 { font-size: 1.8rem; }
+            .topics-grid { grid-template-columns: 1fr; }
+            .topic-card img { height: 140px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo-container">
+                <img src="https://cdn-education.tribune.com.pk/institutes-logo/NLNdxKg2n9sagycMflUOc0oaqzH0Y4UHjH4nsF3e.jpeg" alt="National University of Modern Languages (NUML) Logo">
+                <h1>Individual Differences in Education</h1>
+            </div>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#topics">Topics</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h2 class="animate">Welcome to Understanding Individual Differences</h2>
+            <p class="animate delay-1">Every student is unique. Discover how individual differences shape learning and how educators can create truly inclusive environments.</p>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="animate">About Individual Differences</h2>
+            <div class="about-content">
+                <img src="https://w0.peakpx.com/wallpaper/839/431/HD-wallpaper-premium-machine-learning-and-cyber-mind-domination-digital-brain-artificial-intelligence-big-data-concept-thumbnail.jpg" alt="Brain and Learning" class="about-img animate delay-1">
+                <div class="about-text animate delay-2">
+                    <p>Individual differences refer to the unique variations among learners in cognitive abilities, personality, motivation, and learning styles. Recognizing these differences is key to tailoring teaching strategies and fostering better outcomes for all students.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="topics" class="section" style="background: #f0f7fa;">
+        <div class="container">
+            <h2 class="animate">Key Topics</h2>
+            <div class="topics-grid">
+                <div class="topic-card animate delay-1">
+                    <img src="https://plus.unsplash.com/premium_photo-1682124651258-410b25fa9dc0?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aW50ZWxsaWdlbmNlfGVufDB8fDB8fHww" alt="Intelligence">
+                    <h3>Intelligence</h3>
+                    <p>Exploring Howard Gardner's Multiple Intelligences theory and cognitive variations.</p>
+                </div>
+                <div class="topic-card animate delay-2">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600" alt="Personality">
+                    <h3>Personality</h3>
+                    <p>Impact of introversion, extroversion, and Big Five traits on learning.</p>
+                </div>
+                <div class="topic-card animate delay-3">
+                    <img src="https://media.istockphoto.com/id/665394574/photo/plan-creative-class-library-student-teacher-ideas-concept.jpg?s=612x612&w=0&k=20&c=P93l-CjulEfzW2xBEor_s7A6POFlWSU-VGYLAl7jjtY=" alt="Learning Styles">
+                    <h3>Learning Styles</h3>
+                    <p>Visual, auditory, kinesthetic, and reading/writing preferences.</p>
+                </div>
+                <div class="topic-card animate delay-4">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600" alt="Motivation">
+                    <h3>Motivation</h3>
+                    <p>Intrinsic vs extrinsic motivation and goal-setting strategies.</p>
+                </div>
+                <div class="topic-card animate delay-5">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgTW0I6g_csWy4HJZCQxvG5VpzIFH-SwjrVQ&s" alt="Emotional Intelligence">
+                    <h3>Emotional Intelligence</h3>
+                    <p>Role of self-awareness, empathy, and emotional regulation in education.</p>
+                </div>
+                <div class="topic-card animate delay-6">
+                    <img src="https://media.istockphoto.com/id/1319902995/photo/world-culture-earth-day.jpg?s=612x612&w=0&k=20&c=wdwEHyql6jaDtCWkNduoQhF81tUHw6Um7b2Ii8y93AQ=" alt="Cultural Differences">
+                    <h3>Cultural Differences</h3>
+                    <p>How cultural background influences learning approaches and values.</p>
+                </div>
+                <div class="topic-card animate delay-7">
+                    <img src="https://www.ipsos.com/sites/default/files/inline-images/woman-men-work-hd.jpg" alt="Gender Differences">
+                    <h3>Gender Differences</h3>
+                    <p>Research on gender-based variations in learning and performance.</p>
+                </div>
+                <div class="topic-card animate delay-8">
+                    <img src="https://img.freepik.com/free-vector/human-age-evolution-white-background-from-kid-old-all-stages-maturity-men-women_613284-194.jpg?semt=ais_hybrid&w=740&q=80" alt="Age and Development">
+                    <h3>Age & Developmental Stages</h3>
+                    <p>Differences across childhood, adolescence, and adulthood learning.</p>
+                </div>
+                <div class="topic-card animate delay-9">
+                    <img src="https://media.istockphoto.com/id/472977300/photo/pretty-teacher-helping-pupils-in-classroom.jpg?s=612x612&w=0&k=20&c=E47j1F7IwSiBd3ciVZnD88nnryWTvJz0xquFj1VAE5U=" alt="Special Needs">
+                    <h3>Special Educational Needs</h3>
+                    <p>Supporting students with dyslexia, ADHD, autism, and giftedness.</p>
+                </div>
+                <div class="topic-card animate delay-10">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlo-cwi1HCdBkyCu3pMF8-L8GzOS1EuOsX_g&s" alt="Socioeconomic Factors">
+                    <h3>Socioeconomic Background</h3>
+                    <p>Influence of family income, parental education, and resources.</p>
+                </div>
+                <div class="topic-card animate delay-11">
+                    <img src="https://media.istockphoto.com/id/1369199737/photo/portrait-of-a-handsome-young-businessman-working-in-office.jpg?s=612x612&w=0&k=20&c=ctxvuvJJZS2euXBGQazRd1W81dXZCJXgW11i2jZnNMI=" alt="Self-Efficacy">
+                    <h3>Self-Efficacy & Confidence</h3>
+                    <p>How belief in one's abilities affects effort and achievement.</p>
+                </div>
+                <div class="topic-card animate delay-12">
+                    <img src="https://craft.io/wp-content/uploads/2025/09/divergentthinking.jpg" alt="Creativity">
+                    <h3>Creativity & Divergent Thinking</h3>
+                    <p>Fostering original thinking and innovation in diverse learners.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="section">
+        <div class="container">
+            <h2 class="animate">Visitor Reviews</h2>
+            <p class="animate delay-1" style="text-align: center;">Share your thoughts and experiences!</p>
+            <form id="review-form" class="review-form">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <textarea id="review" placeholder="Your Review..." rows="5" required></textarea>
+                <button type="submit">Submit Review</button>
+            </form>
+            <div id="review-list" class="review-list"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About This Project</h3>
+                    <p>This website is a project on Individual Differences in Education, developed as part of academic requirements at the National University of Modern Languages (NUML).</p>
+                    <p><strong>Submitted/Made by:</strong> Aleena</p>
+                    <p><strong>Supervisor:</strong> Sir Faraz</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Live Website</h3>
+                    <ul>
+                        <li><i class="fas fa-globe"></i> <a href="https://aleenasiddiqui419-cybe.github.io/website/" target="_blank">View Live Website</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact & Institution</h3>
+                    <ul>
+                        <li><i class="fas fa-university"></i> National University of Modern Languages (NUML)</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Individual Differences in Education - All Rights Reserved | NUML Project by Aleena (Supervisor: Sir Faraz)</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const reviewForm = document.getElementById('review-form');
+            const reviewList = document.getElementById('review-list');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navUl = document.querySelector('nav ul');
+
+            if (menuToggle && navUl) {
+                menuToggle.addEventListener('click', () => {
+                    navUl.classList.toggle('active');
+                });
+            }
+
+            function loadReviews() {
+                const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+                reviewList.innerHTML = '';
+                reviews.forEach(review => {
+                    const div = document.createElement('div');
+                    div.classList.add('review');
+                    div.innerHTML = `<strong>${review.name}</strong><br><p>${review.text}</p>`;
+                    reviewList.appendChild(div);
+                });
+            }
+
+            function saveReview(name, text) {
+                const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+                reviews.push({ name, text });
+                localStorage.setItem('reviews', JSON.stringify(reviews));
+                loadReviews();
+            }
+
+            reviewForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('name').value.trim();
+                const text = document.getElementById('review').value.trim();
+                if (name && text) {
+                    saveReview(name, text);
+                    reviewForm.reset();
+                }
+            });
+
+            loadReviews();
+        });
+    </script>
+</body>
+</html>
